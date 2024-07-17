@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # libs
     'safedelete',
+    'rest_framework',
+    'rest_authtoken',
 
     # apps
     'apps.base',
@@ -83,8 +85,12 @@ WSGI_APPLICATION = 'modSysApi.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'modSysApi',
+        'USER': 'postgres',
+        'PASSWORD': 'mod64',
+        'HOST': '172.18.0.1',
+        'PORT': '5432',
     }
 }
 
@@ -137,3 +143,11 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'apps.users.backends.ModelBackend',
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_authtoken.auth.AuthTokenAuthentication',
+    ),
+}
+
+REGISTRATION_ENABLED = True
